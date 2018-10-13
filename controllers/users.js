@@ -36,13 +36,22 @@ router.post('/login', (req, res)=>{
     });
 });
 
-router.get('/new', (req, res) => {
+router.get('/new', (req, res) => {  
+    if(req.session.currentUser){
+      res.redirect('/')
+    }else{
       res.render('new.ejs');
+    }
 })
 
 router.get('/login', (req, res) => {
-      res.render('login.ejs');
-})
+    if(req.session.currentUser){
+      res.redirect('/')
+    }else{
+    res.render('login.ejs');
+    }
+  })
+
 
 router.delete('/', (req, res)=>{
     req.session.destroy(() => {
