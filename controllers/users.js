@@ -3,6 +3,7 @@
 // =======================================
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt')
 // =======================================
 //              DATABASE
 // =======================================
@@ -16,6 +17,7 @@ const message = [];
 /************* Show ***********************/
 
 router.post('/', (req, res) => {
+  req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
   User.create(req.body, (err, createdUser) => {
     if (err) {
       console.log(err)
@@ -27,7 +29,7 @@ router.post('/', (req, res) => {
 
 router.post('/login', (req, res)=>{
     User.findOne({ username: req.body.username }, (err, foundUser) => {
-        if(req.body.password == foundUser.password){
+        if(bcrypt.compareSync(req.body.password, foundUser.password)){
           req.session.currentUser = foundUser
             res.redirect('/')
         } else {
