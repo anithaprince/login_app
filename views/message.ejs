@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ./partials/head.ejs %>
+  </head>
+    <body>
+      <div class="container">
+        <h1>Add Message</h1>
+        <div class="row">
+          <form class="col s12" action="/home/user/party" method="POST">
+            <div class="row">
+              <div class="input-field col s6">
+                <input placeholder="Type Message here" type="text" class="validate" name="message" required>
+              </div>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Add Message
+            </button>
+          </form>
+        </div>
+    </body>
+</html>

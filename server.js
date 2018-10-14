@@ -76,15 +76,6 @@ app.get('/home', (req, res) => {
   })
 })
 
-app.get('/home/party', (req,res)=>{
-  if(req.session.currentUser){
-    res.render('party.ejs')
-  }else{
-    res.redirect('/')
-  }
-
-})
-
 // =======================================
 //            LISTENER
 // =======================================

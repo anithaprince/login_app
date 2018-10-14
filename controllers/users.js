@@ -7,7 +7,7 @@ const router = express.Router();
 //              DATABASE
 // =======================================
 const User = require('../models/users.js');
-
+const message = [];
 // =======================================
 //              ROUTES
 // =======================================
@@ -36,7 +36,13 @@ router.post('/login', (req, res)=>{
     });
 });
 
-router.get('/new', (req, res) => {  
+router.post('/party', (req, res)=>{
+  message.push(req.body);
+  res.redirect('/home/user/party');
+});
+
+
+router.get('/new', (req, res) => {
     if(req.session.currentUser){
       res.redirect('/')
     }else{
@@ -52,13 +58,28 @@ router.get('/login', (req, res) => {
     }
   })
 
+router.get('/party/message', (req, res) => {
+    if(req.session.currentUser){
+      res.render('message.ejs');
+    }else{
+      res.redirect('/')
+    }
+  })
+
+router.get('/party', (req,res)=>{
+    if(req.session.currentUser){
+      res.render('party.ejs',{
+        message: message
+      })
+    }else{
+      res.redirect('/')
+    }
+})
 
 router.delete('/', (req, res)=>{
     req.session.destroy(() => {
         res.redirect('/')
     })
 })
-
-
 
 module.exports = router;

@@ -7,6 +7,13 @@
 
   <body>
     <h1>Welcome to the party</h1>
-    <a href="/app/messages/new" class="btn waves-effect waves-light">Add a message</a>
+    <a href="/home/user/party/message" class="btn waves-effect waves-light">Add a message</a>
+    <a href="/" class="waves-effect waves-light btn">Go back</a>
+
+    <ul>
+        <% for(let i = 0; i < message.length; i++) { %>
+            <li><%=message[i].message%> </li>
+        <% } %>
+    </ul>
   </body>
 </html>
